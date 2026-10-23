@@ -2,7 +2,7 @@
 
 A free, private tool for getting your personal information off people-search sites. It walks you through 36 data brokers (plus 4 optional ones), most important first. It tracks what you've sent and when, applies your state's legal deadlines, and drafts request emails that cite your state's privacy law and each broker's own policy.
 
-**Live site:** _add your GitHub Pages link here_
+**Live site:** https://dontcarryanumbrella.github.io/optout-tracker/
 
 ## What it does
 
