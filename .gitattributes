@@ -1,0 +1,6 @@
+# Normalize line endings for text files. (The Figma Make version sent fonts and images through
+# Git LFS, which GitHub Pages can't serve; its rules are saved beside this folder as
+# figma-make.gitattributes.bak.)
+* text=auto
+*.woff2 binary
+*.png binary

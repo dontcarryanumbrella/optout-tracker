@@ -1,0 +1,41 @@
+# Publishes the site to GitHub Pages whenever main changes. The site is index.html with the
+# contents of public/ beside it, plus the license files; there's no build step and nothing is
+# fetched from elsewhere.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time; a newer push waits rather than cancelling one mid-way.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble the site
+        run: |
+          mkdir _site
+          cp index.html _site/
+          cp -r public/. _site/
+          # The licenses and notices travel with the published files, as their licenses require.
+          cp LICENSE LICENSE-DATA.md THIRD-PARTY-NOTICES.md _site/
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4
